@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using mvc_rest_api.Models.Repositories.DataContext;
+using mvc_rest_api.Models.Repositories.Implementations;
+using mvc_rest_api.Models.Repositories.Interfaces;
+using mvc_rest_api.Models.Services;
 
 namespace mvc_rest_api
 {
@@ -8,11 +13,18 @@ namespace mvc_rest_api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped<ClienteService>();
+            builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             var app = builder.Build();
 

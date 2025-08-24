@@ -4,41 +4,41 @@ using mvc_rest_api.Models.Repositories.Interfaces;
 
 namespace mvc_rest_api.Models.Services
 {
-    public class ClienteService(IClienteRepository repository)
+    public class ClienteService(IClienteRepository _repository)
     {
         public Task<IEnumerable<Cliente>> ListarTodosAsync()
         {
-            return repository.FindAllAsync();
+            return _repository.FindAllAsync();
         }
 
         public Task<Cliente> ObterPorIdAsync(int id)
         {
-            return repository.FindByIdAsync(id);
+            return _repository.FindByIdAsync(id);
         }
 
         public Task<IEnumerable<Cliente>> BuscarPorNomeAsync(string nome)
         {
-            return repository.FindByNameAsync(nome);
+            return _repository.FindByNameAsync(nome);
         }
 
         public Task CriarAsync(Cliente cliente)
         {
-            return repository.AddAsync(cliente);
+            return _repository.AddAsync(cliente);
         }
 
         public Task AtualizarAsync(Cliente cliente)
         {
-            return repository.UpdateAsync(cliente);
+            return _repository.UpdateAsync(cliente);
         }
 
         public Task DeletarAsync(int id)
         {
-            return repository.DeleteAsync(id);
+            return _repository.DeleteAsync(id);
         }
 
         public Task<int> ContarAsync()
         {
-            return repository.CountAsync();
+            return _repository.CountAsync();
         }
     }
 }
